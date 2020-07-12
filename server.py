@@ -1,10 +1,11 @@
 from flask import Flask, request, abort
 from datetime import datetime
+import time
 
 app = Flask(__name__)
 messages = [
-    {'name': 'Jack', 'time': 10, 'text': '123'},
-    {'name': 'Jack', 'time': 20, 'text': '1234'}
+    {'name': 'Jack', 'time': time.time(), 'text': '123'},
+    {'name': 'Jack', 'time': time.time(), 'text': '1234'},
 ]
 users = {
     'Jack': '12345'
@@ -19,9 +20,13 @@ def hello_view():
 @app.route("/status")
 def status_view():
     return {
-        'status': 'OK',
-        'name': 'ErmMsg',
-        'time': datetime.now()
+        'status': True,
+        'name': 'ABC',
+        'time0': datetime.now(),
+        'time1': datetime.now().isoformat(),
+        'time2': datetime.now().strftime('Hi %Y/%m/%d %H:%M:%S'),
+        'time3': time.time(),
+        'time4': time.asctime()
     }
 
 
@@ -32,7 +37,7 @@ def send_view():
     text = request.json.get('text')
 
     for token in [name, password, text]:
-        if not isinstance(token.str) or not token or len(token) > 1024:
+        if not isinstance(token, str) or not token or len(token) > 1024:
             abort(400)
 
     if name in users:
@@ -43,7 +48,7 @@ def send_view():
         # sign up
         users[name] = password
 
-    messages.append({'name': name, 'time': 10, 'text': text})
+    messages.append({'name': name, 'text': text, 'time': time.time()})
     return {'ok': True}
 
 

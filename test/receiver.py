@@ -1,5 +1,7 @@
-from datetime import datetime
+# https://build-system.fman.io/qt-designer-download
+
 import time
+from datetime import datetime
 
 import requests
 
@@ -8,7 +10,7 @@ def format_message(message):
     name = message['name']
     text = message['text']
     dt = datetime.fromtimestamp(message['time'])
-    dt_beauty = dt.strftime('%Y/%m/%d %H:%M:$S')
+    dt_beauty = dt.strftime('%Y/%m/%d %H:%M:%S')
     return f'{name} {dt_beauty}\n{text}\n'
 
 

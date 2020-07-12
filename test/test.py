@@ -1,4 +1,4 @@
-from test_function import max_for_dicts, filter_dicts
+from test.test_functions import max_for_dicts, filter_dicts
 
 # numbers = [1, 2, 6, 3, 23, 34, 12, 2, 3, 9]
 # print(max(numbers))
@@ -14,4 +14,5 @@ messages = [
 print(max_for_dicts([], key='time'))
 print(max_for_dicts(messages, key='time'))
 
+print(filter_dicts([], key='time', min_value=30))
 print(filter_dicts(messages, key='time', min_value=30))
